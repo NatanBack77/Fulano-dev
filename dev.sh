@@ -26,8 +26,8 @@ function homebrew() {
   brew doctor
 }
 
-function zsh(){
-  
+function zsh() {
+
   sudo apt-get install zsh
   git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
@@ -36,7 +36,7 @@ function zsh(){
   echo -e "ZSH_THEME="powerlevel10k/powerlevel10k" \n "
 
   echo -e "reinicie o terminal \n"
-   
+
   echo -e "p10k configure"
 
   git clone https://github.com/ohmyzsh/ohmyzsh.git
@@ -79,19 +79,18 @@ function zsh(){
     zsh-interactive-cd
 )"
 }
-if [ "$(date +%k)" -ge 6 -a "$(date +%k)" -le 11 ]
-then
-figlet -cf slant 'Bom Dia FulanoDev'
-echo -e '\n'
+if [ "$(date +%k)" -ge 6 -a "$(date +%k)" -le 11 ]; then
+  figlet -cf slant 'Bom Dia FulanoDev'
+  echo -e '\n'
 
-elif [ "$(date +%k)" -ge 12 -a "$(date +%k)" -le 17 ]
-then
-figlet -lf slant "Boa tarde FulanoDev"
-echo -e '\n'
+elif [ "$(date +%k)" -ge 12 -a "$(date +%k)" -le 17 ]; then
+  figlet -lf slant "Boa tarde FulanoDev"
+  echo -e '\n'
 
-else figlet -lf slant "Boa noite FulanoDev"
-echo -e '\n'
-fi 
+else
+  figlet -lf slant "Boa noite FulanoDev"
+  echo -e '\n'
+fi
 
 echo -e " Escolha o que quer instalar:"
 echo -e "\n1-NODE:"
@@ -112,7 +111,6 @@ else
   echo -e '\n'
   figlet -lf digital 'OK'
 fi
-
 
 echo -e '\n'
 echo -e " \n 2-homebrew \n"
@@ -161,5 +159,3 @@ else
 
   figlet -lf digital 'OK'
 fi
-
-
