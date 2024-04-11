@@ -79,6 +79,19 @@ function zsh() {
     zsh-interactive-cd
 )"
 }
+function kind() {
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+chmod +x ./kind
+sudo cp ./kind /usr/local/bin/kind
+rm -rf kind
+}
+
+function kubectl(){
+   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
+    echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+}
 if [ "$(date +%k)" -ge 6 -a "$(date +%k)" -le 11 ]; then
   figlet -cf slant 'Bom Dia FulanoDev'
   echo -e '\n'
@@ -136,7 +149,7 @@ echo -e 'DIGITE:\n'
 read kind
 
 if [ "$kind" = 'y' ]; then
-  homebrew
+   kind
 else
 
   figlet -lf digital 'OK'
@@ -155,6 +168,20 @@ read zsh
 
 if [ "$zsh" = 'y' ]; then
   zsh
+else
+
+  figlet -lf digital 'OK'
+fi
+
+for ((count = 0; count < 128; count++)); do
+  echo -n "#"
+done
+
+echo -e 'DIGITE:\n'
+read kubectl
+
+if [ "$kubectl" = 'y' ]; then
+  kubectl
 else
 
   figlet -lf digital 'OK'
