@@ -15,21 +15,18 @@ function node() {
 }
 
 function homebrew() {
-  sudo apt install build-essential
-  dnf groups mark install "Development Tools"
-  dnf groupinstall "Development Tools"
+  sudo apt updateE
 
-  which make
-  curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-  /bin/bash install.sh
-
+  sudo apt-get install build-essential
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   brew doctor
 }
 
 function zsh() {
 
   sudo apt-get install zsh
-  git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  sudo git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
   echo -e "Então você precisa habilitá-lo, altere o valor de ZSH_THEME para o seguinte no ~/.zshrc arquivo: \n"
 
@@ -80,17 +77,17 @@ function zsh() {
 )"
 }
 function kind() {
-[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
-chmod +x ./kind
-sudo cp ./kind /usr/local/bin/kind
-rm -rf kind
+  [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+  chmod +x ./kind
+  sudo cp ./kind /usr/local/bin/kind
+  rm -rf kind
 }
 
-function kubectl(){
-   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
-    echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+function kubectl() {
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
+  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 }
 if [ "$(date +%k)" -ge 6 -a "$(date +%k)" -le 11 ]; then
   figlet -cf slant 'Bom Dia FulanoDev'
@@ -149,7 +146,7 @@ echo -e 'DIGITE:\n'
 read kind
 
 if [ "$kind" = 'y' ]; then
-   kind
+  kind
 else
 
   figlet -lf digital 'OK'
